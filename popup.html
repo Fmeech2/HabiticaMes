@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HabiticaMess</title>
+</head>
+
+<body>
+    Время в секундах для автоматического обновления сообщений:
+    <input id="HabiticaMessTime" type="number" min="10">
+    <script>
+        var input = document.getElementById('HabiticaMessTime');
+        
+        input.addEventListener('input', function () {
+            var value = parseInt(input.value);
+            if (value < 10) {
+                input.value = 10;
+                value = 10;
+            }
+            
+            opera.storage.local.get(['HabiticaMessTime'], function (result) {
+                var habiticaMessTime = result.HabiticaMessTime || {};
+                habiticaMessTime.value = value;
+                
+                opera.storage.local.set({ 'HabiticaMessTime': habiticaMessTime }, function () {
+                    console.log('HabiticaMessTime updated:', value);
+                });
+            });
+        });
+
+        // При загрузке страницы установите значение input из хранилища
+        opera.storage.local.get(['HabiticaMessTime'], function (result) {
+            var habiticaMessTime = result.HabiticaMessTime || {};
+            var defaultValue = 15;
+            var storedValue = habiticaMessTime.value || defaultValue;
+            
+            input.value = storedValue;
+        });
+    </script>
+
+</body>
+
+</html>

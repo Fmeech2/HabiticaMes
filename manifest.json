@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Habitica real-time message",
+    "version": "2.0",
+    "description": "Обновляй сообщения на Habitica при просмотре сообщений команды в реальном времени!",
+    "author": "Fmeech2",
+    "icons": {
+        "16": "ico16.png",
+        "32": "ico32.png",
+        "48": "ico48.png",
+        "128": "ico128.png"
+      },
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "permissions": ["scripting"],
+    "host_permissions": ["<all_urls>"],
+    "content_scripts": [
+      {
+        "matches": ["https://habitica.com/party"],
+        "js": ["HabiticaMess.js"]
+      }
+    ]
+  }
+  
