@@ -31,19 +31,22 @@ function updateContainer() {
 		console.log('Начался скрипт после полной загрузки iframe ' + " (" + KolichectvoObnovleniStranis + ")");
 		var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
 		console.log('Узнали документ iframe '  + " (" + KolichectvoObnovleniStranis + ")");
-		var containerElements = iframeDocument.querySelectorAll('.container-fluid');
-		if (containerElements.length > 0) {
-			var containerContent = containerElements[0].innerHTML;
+		var iframeElements = iframeDocument.querySelectorAll('.container-fluid');
+		if (iframeElements.length > 0) {
+			var iframeContent = iframeElements[1].innerHTML;
 			console.log('Нашли первый контейнер .container-fluid в iframe ' + " (" + KolichectvoObnovleniStranis + ")");
-			var currentContainer = document.querySelector('.container-fluid:first-child');
-			if (currentContainer) {
-				currentContainer.innerHTML = containerContent;
-				console.log('Нашли единственный	контейнер .container-fluid на этой странице '  + " (" + KolichectvoObnovleniStranis + ")");
-			}
+			var IsStranisaContainer = document.querySelectorAll('.container-fluid')[1];
+			console.log("ВОТ ОН: "+IsStranisaContainer);
+
+			IsStranisaContainer.innerHTML = iframeContent;
+			console.log('Нашли контейнер .container-fluid на этой странице '  + " (" + KolichectvoObnovleniStranis + ")");
+			
 		}
 		console.log("%cГотово! Отобразил новые сообщения на странице. "  + " (" + KolichectvoObnovleniStranis + ")", "color: #007bff; font-size: 32px; -webkit-text-stroke: 1px black; padding: 10px;");
 	});
 }
 let KolichectvoObnovleniStranis = 0;
+console.log("%cСтарт сообщений в реальном времени", "color: #007bff; font-size: 32px; -webkit-text-stroke: 1px black; padding: 10px;");
+
 // Запускаем обновление контейнера каждые 3 секунды
 setInterval(updateContainer, 15000);
